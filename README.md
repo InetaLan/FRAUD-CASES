@@ -12,7 +12,7 @@ In order to detect potential fraud cases using machine learning classifiers, a n
 The initial dataset consists of 17 556 rows and 24 columns. There is a strong class imbalance (only 4% of the cases are fraud cases), which may have an impact on the poor model classification.
 
 > [!NOTE]
-> Data preparation code is in make_data file.
+> Data preparation code is in [make_data](https://github.com/InetaLan/FRAUD-CASES/blob/main/make_data) file.
 
 #### 2.1. Feature engineering
 Strong outliers were removed using IQR (Interquartile range) method (coefficient 3.5) seperatly for each class (fraud or non-fraud). 
