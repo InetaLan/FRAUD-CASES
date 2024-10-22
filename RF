@@ -51,6 +51,24 @@ def evaluate_classifier(classifier, Train_X, Train_Y, Test_X, Test_Y):
     cm_train = confusion_matrix(Train_Y, y_pred_train)
     cm_test = confusion_matrix(Test_Y, y_pred_test)
 
+    # plot confusion matrices
+    fig, ax = plt.subplots(1, 2, figsize=(25, 10))
+    
+    cm_display_train = ConfusionMatrixDisplay(cm_train)
+    cm_display_train.plot(ax=ax[0], cmap='Blues', values_format='d')
+    ax[0].set_title('Training set', fontsize=24)
+    ax[0].set_xlabel('Prediction', fontsize=20)
+    ax[0].set_ylabel('True class', fontsize=20)
+    ax[0].tick_params(labelsize=16)
+
+    cm_display_test = ConfusionMatrixDisplay(cm_test)
+    cm_display_test.plot(ax=ax[1], cmap='Blues', values_format='d')
+    ax[1].set_title('Testing set', fontsize=24)
+    ax[1].set_xlabel('Prediction', fontsize=20)
+    ax[1].set_ylabel('True class', fontsize=20)
+    ax[1].tick_params(labelsize=16)
+
+    plt.show()
 
 
 evaluate_classifier(
