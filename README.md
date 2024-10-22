@@ -11,6 +11,9 @@ In order to detect potential fraud cases using machine learning classifiers, a n
 
 The initial dataset consists of 17 556 rows and 24 columns. There is a strong class imbalance (only 4% of the cases are fraud cases), which may have an impact on the poor model classification.
 
+> [!NOTE]
+> Data preparation code is in make_data file.
+
 #### 2.1. Feature engineering
 Strong outliers were removed using IQR (Interquartile range) method (coefficient 3.5) seperatly for each class (fraud or non-fraud). 
 Some categorical attributes, e.g. Vehicle model, could obtain a lot of unique values, thus possibly causing "_curse of dimensionality_" after encoding. A series of experiments showed that dimentionality reduction (UMAP, PCA, t-SNE) does not perform well on such dataset. For that reason feature engineering was used: only 5 most frequent values in non-fraudulent cases and values repeaded more than 3 times in fraudulent cases were retained, and the rest of values have been renamed as "_OTHER_". Latter on _OneHotEncoder_ was applied.
