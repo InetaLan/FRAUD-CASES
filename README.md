@@ -1,7 +1,7 @@
 # Fraudulent claim cases
 
 ## 1. Overview
-The aim of study is to identify the most commonly used machine learning methods for detecting insurance claims fraud and apply them to the given data. Main objectives: conduct a literature analysis, prepare a dataset for the application of machine learning methods, implement chosen techniques, evaluate the classifiers performance and visualize the results.
+The aim is to apply Random Forest Classifiaction for detecting fraudulent insurance claims fraud. Main objectives: conduct a literature analysis, prepare a dataset for the application of machine learning methods, implement chosen techniques and evaluate the classifiers performance.
 
 ## 2. Data
 The data used in the study consist of motor insurance claims registered between 1 January 2023 and 31 December 2023 of physical insurers accidents in Lithuania. 
@@ -96,3 +96,14 @@ evaluate_classifier(
     Test_X, Test_Y,
     )
 ```
+## 4. Results
+
+| Class | Precision | Recall | F1 | N |
+|:-----|:--------:|:------:|:------:|:------:|
+| Non-fraud | 0.97| 0.98 | 0.98 | 2 265 |
+| Fraud | 0.74| 0.62|0.68|176|
+|  | ||||
+|Accuracy | ||0.96|2 441|
+|  | ||||
+|Macro Avg |0.86 |0.80|0.83|2 441|
+|Weighted Avg|0.95|0.96|0.96|2441|
