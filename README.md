@@ -115,3 +115,4 @@ Found optimal hyperparameters after grid search: {max_depth: 10, max_features: s
 |  | ||||
 |Macro Avg |0.86 |0.80|0.83|2 441|
 |Weighted Avg|0.95|0.96|0.96|2441|
+
