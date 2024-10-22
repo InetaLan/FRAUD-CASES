@@ -1,3 +1,13 @@
+import pandas as pd
+import numpy as np
+import simplemma
+
+from collections import Counter
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn import model_selection
+from nltk.tokenize import word_tokenize
+from sklearn.feature_extraction.text import TfidfVectorizer
+from imblearn.under_sampling import RandomUnderSampler
 
 na_values_list = ["-", " ", "(n/z)"]
 DATA_2023 = pd.read_excel("3cf4387e-a552-4d31-987c-07927aff55a8.xlsx", na_values=na_values_list)
@@ -106,11 +116,13 @@ X_transformed = vectorizer.fit_transform(data['Processed_Text'])
 print(X_transformed.shape)
 print(vectorizer.get_feature_names_out())
 
+# Print data example
 dense_head = X_transformed[:5].todense()
 df_head = pd.DataFrame(dense_head, columns=vectorizer.get_feature_names_out())
 print("head of vectorized description")
 print(df_head)
 
+""" Encoding variables """
 y = data['label']
 X = data.drop(columns=['label', 'Processed_Text', 'Words'])
 
@@ -126,12 +138,17 @@ encoded_df = pd.DataFrame(encoded_categorical, columns=encoded_columns, index=X.
 X = X.drop(columns=categorical_columns)
 X_encoded = pd.concat([X, encoded_df], axis=1)
 
+# Combining prepared encoded data and vectorized text
 X_transformed_df = pd.DataFrame(X_transformed.toarray(), columns=vectorizer.get_feature_names_out())
 X_final = pd.concat([X_encoded.reset_index(drop=True), X_transformed_df.reset_index(drop=True)], axis=1)
 print("Shape of the final feature set: ", X_final.shape)
 
 Train_X, Test_X, Train_Y, Test_Y = model_selection.train_test_split(X_final, y, test_size=0.20,stratify=y, random_state=123)
-undersample = RandomUnderSampler(sampling_strategy='majority')
 
+# Undesanmpling training data (dealing with huge class dissbalanse problem)
+undersample = RandomUnderSampler(sampling_strategy='majority')
 Train_X, Train_Y = undersample.fit_resample(Train_X, Train_Y)
 print(Counter(Train_Y))
+
+Val_X, dev_x, Val_Y, dev_y = model_selection.train_test_split(Train_X,Train_Y, train_size=0.30, stratify=Train_Y, random_state=123)
+
